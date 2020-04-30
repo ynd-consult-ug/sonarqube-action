@@ -21,3 +21,6 @@ inputs:
   password:
     description: 'Password that goes with the sonar.login username. This should be left blank if an authentication token is being used.'
     required: false
+  projectKey:
+    description: 'Project key in SonarQube Server.'
+    required: true
