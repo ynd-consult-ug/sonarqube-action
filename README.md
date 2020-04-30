@@ -8,41 +8,39 @@ SonarQube is an open-source platform developed by SonarSource for continuous ins
 
 ## Requirements
 
-* Have SonarQube on server. [Install now](https://docs.sonarqube.org/latest/setup/install-server/) if it's not already the case!
+* Get SonarQube server. [Install now](https://docs.sonarqube.org/latest/setup/install-server/)
 
 ## Usage
 
 The workflow, usually declared in `.github/workflows/build.yml`, looks like:
 
 ```yaml
-on: push
 name: Main Workflow
+on:
+  pull_request:
+    branches:
+      - master
 jobs:
   sonarQubeTrigger:
     name: SonarQube Trigger
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
     - name: SonarQube Scan
-      uses: kitabisa/sonarqube-action@master
+      uses: ynd-consult-ug/sonarqube-action@master
       with:
         host: ${{ secrets.SONARQUBE_HOST }}
-        login: ${{ secrets.SONARQUBE_TOKEN }}
+        token: ${{ secrets.SONARQUBE_TOKEN }}
+        projectKey: ${{ secrets.SONARQUBE_PROJECTKEY}}
+        projectBaseDir: checkout_dir
 ```
 
 You can change the analysis base directory by using the optional input `projectBaseDir` like this:
-
-```yaml
-uses: kitabisa/sonarqube-action@master
-with:
-  projectBaseDir: my-custom-directory
-```
 
 ## Secrets
 
 - `host` - **_(Required)_** this is the SonarQube server URL.
 - `login` - **_(Required)_** the login or authentication token of a SonarQube user with Execute Analysis permission on the project. See [how to generate SonarQube token](https://docs.sonarqube.org/latest/user-guide/user-token/).
-- `password` - The password that goes with the `login` username. This should be left blank if an `login` are authentication token.
 
 You can set all variable in the "Secrets" settings page of your repository.
 

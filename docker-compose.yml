@@ -1,0 +1,7 @@
+version: '3.5'
+services:
+  sqs:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+    image: docker.pkg.github.com/ynd-consult-ug/sonarqube-action:latest
