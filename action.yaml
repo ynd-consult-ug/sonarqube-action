@@ -1,4 +1,4 @@
-name: 'SonarQube Scan'
+name: 'SonarQube Scanner by YND'
 description: 'Scan your code with SonarQube Scanner to detect bugs, vulnerabilities and code smells.'
 author: 'YND'
 branding:
